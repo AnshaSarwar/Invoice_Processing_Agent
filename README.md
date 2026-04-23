@@ -1,73 +1,113 @@
-# 🤖 InvoSync: AI-Powered Invoice Matching Agent
+# 🤖 InvoSync — AI-Powered Invoice Processing Agent
 
-An intelligent agentic pipeline for matching purchase order invoices with database records using LangGraph, LlamaParse, and PostgreSQL.
+An intelligent agentic pipeline for automated invoice-to-PO matching, built with **LangGraph**, **Gemini 2.5 Flash**, **LlamaParse**, and a **Next.js** real-time dashboard.
 
 ## 🚀 Overview
 
-InvoSync automates the tedious task of matching incoming invoices with existing Purchase Orders (POs). It features an "Agentic Reflection" loop that cross-checks its own data extraction for high accuracy.
+InvoSync automates accounts payable by extracting structured data from PDF invoices, validating it against Purchase Orders in a PostgreSQL database, and surfacing results through a live-streaming dashboard — all powered by a multi-node AI agent graph.
 
 ### Key Features
-- **📩 Real-time Email Trigger**: Automatically downloads invoices from emails.
-- **🧠 Agentic Pipeline**: Built with LangGraph for robust multi-step reasoning.
-- **🔍 Reflection Loop**: The agent "thinks" about its extraction and corrects errors (e.g., math discrepancies).
-- **🗄️ Database Integration**: Professional PostgreSQL support for PO data.
-- **📊 Professional Dashboard**: Streamlit-based UI for monitoring and manual uploads.
+- **🧠 Agentic Pipeline**: Multi-step LangGraph orchestration (Parse → Validate → PO Lookup → Compare)
+- **📄 Structured Extraction**: Pydantic schema-enforced output from Gemini 2.5 Flash Lite via LlamaParse
+- **⚡ Real-time SSE**: Live node-by-node processing updates streamed to the frontend
+- **🔐 Role-Based Access**: Two-tier RBAC (Admin / Operator) with JWT authentication
+- **📊 AI Observability**: LangSmith tracing for full prompt/response visibility
+- **🗄️ PostgreSQL**: Production-grade database for POs, users, and processing logs
 
 ## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    A[Email with PDF] -->|Trigger| B[Email Handler]
-    B -->|Save File| C[Local Storage]
-    C --> D[LangGraph Agent]
-    D --> E[LlamaParse]
-    E -->|Extracted Data| F[Reflection Node]
-    F -->|Self-Correction| D
-    F -->|Validation| G[PO Verifier]
-    G -->|SQL Query| H[(PostgreSQL)]
-    H -->|PO Data| I[Comparison Node]
-    I -->|Successful Match| J[Completed]
-    I -->|Discrepancy| K[Manual Review Needed]
+    A[PDF Upload via Dashboard] --> B[FastAPI Backend]
+    B --> C[LlamaParse — PDF to Markdown]
+    C --> D[Gemini 2.5 Flash Lite — Structured Extraction]
+    D --> E[Pydantic Validation — InvoiceExtraction Schema]
+    E --> F{Valid Invoice?}
+    F -->|Yes| G[PO Lookup — PostgreSQL]
+    F -->|No| H[Rejected — Reason Logged]
+    G --> I[Field-by-Field Comparison]
+    I -->|Match| J[✅ Successful]
+    I -->|Discrepancy| K[⚠️ Flagged for Review]
+    
+    B -.->|SSE Stream| L[Next.js Dashboard]
+    L --> M[AI Pipeline Monitor]
+    L --> N[Stats & Logs]
 ```
 
-## 🛠️ Setup
+## 🛠️ Tech Stack
 
-1. **Environment**:
-   ```bash
-   python -m venv venv
-   .\venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+| Layer | Technology |
+|-------|-----------|
+| **AI Model** | Google Gemini 2.5 Flash Lite |
+| **Agent Framework** | LangGraph + LangChain |
+| **Document Parsing** | LlamaParse (layout-aware OCR) |
+| **Schema Enforcement** | Pydantic v2 (`InvoiceExtraction`) |
+| **Backend** | FastAPI + Uvicorn |
+| **Frontend** | Next.js 16 (App Router, TypeScript) |
+| **Database** | PostgreSQL + SQLAlchemy |
+| **Auth** | JWT (HS256) with RBAC |
+| **Observability** | LangSmith Tracing |
+| **Streaming** | Server-Sent Events (SSE) |
 
-2. **Database**:
-   Configure `.env` with your PostgreSQL credentials, then:
-   ```bash
-   python database.py --init
-   ```
+## 📦 Setup
 
-3. **Run**:
-   - **Streamlit Dashboard**: `python main.py ui`
-   - **Real-time Email Listener**: `python main.py email`
-   - **Local Folder Watcher**: `python main.py watcher` (Monitors `invoices_temp` for new files)
-   - **Direct Processing**: `python main.py process --file "path/to/invoice.pdf"`
+### 1. Backend
+```bash
+cd backend
+python -m venv venv
+.\venv\Scripts\activate        # Windows
+pip install -r ../requirements.txt
 
-### 📧 Gmail API Setup (OAuth2)
-To use the automated email listener (`python main.py gmail`):
-1.  Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2.  Create a new project.
-3.  Enable the **Gmail API** in "APIs & Services" > "Library".
-4.  Go to "APIs & Services" > "OAuth consent screen", set "User Type" to **External**, and add your email as a **Test User**.
-5.  Go to "APIs & Services" > "Credentials", click **Create Credentials** > **OAuth client ID**.
-6.  Select **Desktop App**, name it, and click **Create**.
-7.  Download the JSON file, rename it to `credentials.json`, and place it in the project root.
-8.  Run `python main.py gmail`. A tab will open in your browser to authorize the app.
+# Configure environment
+cp .env.example .env           # Then edit with your API keys
+```
 
-## 👨‍💻 Tech Stack
-- **AI**: LangChain, LangGraph, Groq (Llama-3.3-70B)
-- **Document Analysis**: LlamaParse
-- **Database**: PostgreSQL (SQLAlchemy)
-- **UI**: Streamlit
-- **Automation**: imap_tools
+### 2. Frontend
+```bash
+cd frontend
+npm install
+```
+
+### 3. Database
+Create a PostgreSQL database and set `DATABASE_URL` in `backend/.env`:
+```
+DATABASE_URL=postgresql://user:password@localhost:5432/your_db
+```
+Tables are created automatically on first run.
+
+### 4. Run
+```bash
+# Terminal 1 — Backend
+cd backend
+uvicorn app.main:app --reload
+
+# Terminal 2 — Frontend
+cd frontend
+npm run dev
+```
+Open **http://localhost:3000**
+
+## 🔑 Environment Variables
+
+See [`backend/.env.example`](backend/.env.example) for the full list:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GEMINI_API_KEY` | ✅ | Google AI Studio API key |
+| `LLAMA_CLOUD_API_KEY` | ✅ | LlamaCloud parsing key |
+| `DATABASE_URL` | ✅ | PostgreSQL connection string |
+| `SECRET_KEY` | ✅ | JWT signing secret |
+| `LANGCHAIN_API_KEY` | Optional | LangSmith observability |
+
+## 📊 AI Observability (LangSmith)
+
+Add these to `backend/.env` to enable full trace visibility:
+```env
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_key
+LANGCHAIN_PROJECT=InvoSync
+```
+View traces at [smith.langchain.com](https://smith.langchain.com) → Projects → InvoSync
 
 ---
-*Developed for professional AI agent demonstrations.*
+*Built with LangGraph agentic orchestration and Gemini structured extraction.*
