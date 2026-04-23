@@ -42,7 +42,7 @@ export default function DebuggerDrawer({ isOpen, onClose, events }: DebuggerDraw
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <h3 className="text-xl font-black text-white uppercase tracking-tighter italic">Deep Diagnostics</h3>
             </div>
-            <p className="text-[10px] text-zinc-500 uppercase tracking-[0.3em] font-bold">System-Level AI Trace logs</p>
+            <p className="text-[10px] text-zinc-300 uppercase tracking-[0.3em] font-bold">System-Level AI Trace logs</p>
           </div>
           <button 
             onClick={onClose} 
@@ -72,7 +72,7 @@ export default function DebuggerDrawer({ isOpen, onClose, events }: DebuggerDraw
                   <div className="flex-1 space-y-4">
                     <div className="flex justify-between items-center">
                       <div className="flex flex-col">
-                        <span className="text-[9px] font-black text-zinc-700 uppercase tracking-[0.2em] mb-1">Execution Node</span>
+                        <span className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em] mb-1">Execution Node</span>
                         <h4 className="text-base font-black text-white uppercase tracking-tight">
                           {evt.node.replace('__', '').split('_').join(' ')}
                         </h4>
@@ -108,10 +108,10 @@ export default function DebuggerDrawer({ isOpen, onClose, events }: DebuggerDraw
                       {expandedNodes[idx] && (
                         <div className="space-y-3 mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
                           <div className="flex items-center justify-between">
-                            <span className="text-[9px] text-zinc-600 uppercase font-black tracking-widest">Raw Payload Data</span>
-                            <span className="text-[8px] text-zinc-700 font-mono">ID: {evt.update?.task_id?.slice(-8) || 'N/A'}</span>
+                            <span className="text-[9px] text-zinc-400 uppercase font-black tracking-widest">Raw Payload Data</span>
+                            <span className="text-[8px] text-zinc-500 font-mono">ID: {evt.update?.task_id?.slice(-8) || 'N/A'}</span>
                           </div>
-                          <pre className="text-[10px] font-mono leading-relaxed text-zinc-500 overflow-x-auto p-4 bg-black/60 rounded-2xl custom-scrollbar border border-white/5">
+                          <pre className="text-[10px] font-mono leading-relaxed text-zinc-300 overflow-x-auto p-4 bg-black/60 rounded-2xl custom-scrollbar border border-white/5">
                             {JSON.stringify(evt.update, (k, v) => (k === '_original_text' ? undefined : v), 2)}
                           </pre>
                         </div>
@@ -126,15 +126,15 @@ export default function DebuggerDrawer({ isOpen, onClose, events }: DebuggerDraw
               <div className="w-24 h-24 mb-6 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 animate-pulse">
                 <span className="text-4xl">🛰️</span>
               </div>
-              <p className="font-black uppercase tracking-[0.4em] text-[10px] text-zinc-500">Awaiting system activity...</p>
-              <p className="text-[9px] text-zinc-700 mt-2 uppercase font-bold tracking-widest">Connect to global event stream</p>
+              <p className="font-black uppercase tracking-[0.4em] text-[10px] text-zinc-300">Awaiting system activity...</p>
+              <p className="text-[9px] text-zinc-400 mt-2 uppercase font-bold tracking-widest">Connect to global event stream</p>
             </div>
           )}
         </div>
         
         {/* Footer */}
         <div className="p-6 border-t border-white/10 bg-black/40 backdrop-blur-2xl">
-          <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-zinc-600">
+          <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-zinc-400">
             <span>InvoSync Engine v1.0.4</span>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />

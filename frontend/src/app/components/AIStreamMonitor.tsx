@@ -34,7 +34,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
     return (
       <div className="py-12 flex flex-col items-center justify-center border-t border-white/5 opacity-50">
         <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse mb-4" />
-        <p className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.4em]">System Link Standby</p>
+        <p className="text-[10px] text-zinc-400 font-black uppercase tracking-[0.4em]">System Link Standby</p>
       </div>
     );
   }
@@ -47,7 +47,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
         </div>
         <div>
           <h2 className="text-sm font-black text-white uppercase tracking-widest italic">AI Processing Pipeline</h2>
-          <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest mt-0.5">Live Agent Orchestration</p>
+          <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-widest mt-0.5">Live Agent Orchestration</p>
         </div>
       </div>
 
@@ -81,7 +81,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
                 {/* Node Label */}
                 <div className="mt-6 text-center space-y-1.5 px-4 flex flex-col items-center">
                   <h4 className={`text-[10px] font-black uppercase tracking-widest transition-colors ${
-                    isLast ? 'text-blue-400' : 'text-zinc-500 group-hover:text-white'
+                    isLast ? 'text-blue-400' : 'text-zinc-400 group-hover:text-white'
                   }`}>
                     {evt.node.replace('__', '').split('_').join(' ')}
                   </h4>
@@ -100,7 +100,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
                      evt.status}
                   </div>
 
-                  <p className="text-[10px] text-zinc-500 font-medium leading-relaxed line-clamp-2 italic opacity-60 group-hover:opacity-100 transition-opacity mt-2">
+                  <p className="text-[10px] text-zinc-300 font-medium leading-relaxed line-clamp-2 italic group-hover:opacity-100 transition-opacity mt-2">
                     {evt.reason || evt.update?.message || (
                       evt.node.includes('parse') ? "Extracting invoice data..." :
                       evt.node.includes('validate') ? "Verifying document structure..." :

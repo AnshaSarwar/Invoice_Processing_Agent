@@ -25,11 +25,11 @@ function MetadataModal({ log, onClose }: { log: ProcessingLog; onClose: () => vo
         <div className="flex justify-between items-center p-5 border-b border-white/10">
           <div>
             <h3 className="font-bold text-white text-sm">Processing Details</h3>
-            <p className="text-[10px] text-zinc-500 mt-0.5">
+            <p className="text-[10px] text-zinc-300 mt-0.5">
               {log.filepath?.split(/[\/\\]/).pop()} • {log.po_number || 'No PO'}
             </p>
           </div>
-          <button onClick={onClose} className="text-zinc-500 hover:text-white text-xl transition-colors">×</button>
+          <button onClick={onClose} className="text-zinc-300 hover:text-white text-xl transition-colors">×</button>
         </div>
         <div className="p-5 overflow-y-auto max-h-[60vh] space-y-4">
           {/* Status Bar */}
@@ -62,14 +62,14 @@ function MetadataModal({ log, onClose }: { log: ProcessingLog; onClose: () => vo
           {/* Invoice Data */}
           {parsed?.invoice_data && Object.keys(parsed.invoice_data).length > 0 && (
             <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-              <p className="text-[10px] font-bold text-zinc-500 uppercase mb-2">Extracted Invoice Data</p>
+              <p className="text-[10px] font-bold text-zinc-400 uppercase mb-2">Extracted Invoice Data</p>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {Object.entries(parsed.invoice_data)
                   .filter(([k]) => !k.startsWith('_') && k !== 'line_items' && k !== 'is_invoice')
                   .map(([key, val]) => (
                     <div key={key} className="flex justify-between gap-2">
-                      <span className="text-zinc-500 capitalize">{key.replace(/_/g, ' ')}</span>
-                      <span className="text-zinc-300 font-mono text-right truncate max-w-[60%]">{String(val ?? '—')}</span>
+                      <span className="text-zinc-400 capitalize">{key.replace(/_/g, ' ')}</span>
+                      <span className="text-zinc-200 font-mono text-right truncate max-w-[60%]">{String(val ?? '—')}</span>
                     </div>
                   ))}
               </div>
@@ -79,8 +79,8 @@ function MetadataModal({ log, onClose }: { log: ProcessingLog; onClose: () => vo
           {/* Comparison Result */}
           {parsed?.comparison_result && Object.keys(parsed.comparison_result).length > 0 && (
             <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-              <p className="text-[10px] font-bold text-zinc-500 uppercase mb-2">Comparison Result</p>
-              <pre className="text-[11px] font-mono text-zinc-400 whitespace-pre-wrap">
+              <p className="text-[10px] font-bold text-zinc-400 uppercase mb-2">Comparison Result</p>
+              <pre className="text-[11px] font-mono text-zinc-300 whitespace-pre-wrap">
                 {JSON.stringify(parsed.comparison_result, null, 2)}
               </pre>
             </div>
@@ -141,7 +141,7 @@ export default function LogViewer({ logs, user, onDelete, viewMode }: LogViewerP
                 )}
               </div>
               <h3 className="font-bold text-white truncate text-sm mb-1">{log.filepath?.split(/[\/\\]/).pop()}</h3>
-              <div className="text-[11px] text-zinc-500 mb-1">
+              <div className="text-[11px] text-zinc-300 mb-1">
                 PO: <span className="text-blue-300">{log.po_number || '—'}</span>
               </div>
               {log.error_message && log.status !== 'completed' && (
@@ -155,20 +155,20 @@ export default function LogViewer({ logs, user, onDelete, viewMode }: LogViewerP
               )}
               <div className="mt-4 flex gap-4 text-center">
                 <div className="flex-1">
-                  <span className="block text-[9px] text-zinc-600 uppercase">Confidence</span>
+                  <span className="block text-[9px] text-zinc-400 uppercase">Confidence</span>
                   <span className="text-xs font-bold text-blue-400">
                     {log.confidence_score != null ? (log.confidence_score * 100).toFixed(0) : '—'}%
                   </span>
                 </div>
                 <div className="flex-1">
-                  <span className="block text-[9px] text-zinc-600 uppercase">Time</span>
-                  <span className="text-xs font-bold text-zinc-300">
+                  <span className="block text-[9px] text-zinc-400 uppercase">Time</span>
+                  <span className="text-xs font-bold text-zinc-200">
                     {log.processing_time_seconds?.toFixed(1) ?? '—'}s
                   </span>
                 </div>
                 <div className="flex-1">
-                  <span className="block text-[9px] text-zinc-600 uppercase">Date</span>
-                  <span className="text-xs font-bold text-zinc-400">
+                  <span className="block text-[9px] text-zinc-400 uppercase">Date</span>
+                  <span className="text-xs font-bold text-zinc-200">
                     {new Date(log.timestamp).toLocaleDateString()}
                   </span>
                 </div>

@@ -43,14 +43,14 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
         <h1 className="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
           InvoSync AI
         </h1>
-        <p className="text-zinc-500 text-sm mt-2 font-medium">
+        <p className="text-zinc-300 text-sm mt-2 font-medium">
           {isSignup ? "Create your professional account" : "Sign in to your workplace"}
         </p>
       </div>
 
       <form onSubmit={handleAuth} className="space-y-4">
         <div>
-          <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-1">Username</label>
+          <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Username</label>
           <input
             type="text" required
             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 outline-none transition-all"
@@ -61,7 +61,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
         {isSignup && (
           <>
             <div>
-              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-1">Email (Optional)</label>
+              <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Email (Optional)</label>
               <input
                 type="email"
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 outline-none transition-all"
@@ -70,7 +70,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
               />
             </div>
             <div>
-              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-1">Role</label>
+              <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Role</label>
               <select
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 outline-none transition-all"
                 value={authData.role}
@@ -84,7 +84,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
           </>
         )}
         <div>
-          <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-1">Password</label>
+          <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Password</label>
           <input
             type="password" required
             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 outline-none transition-all"
@@ -106,7 +106,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
           <button
             type="button"
             onClick={() => setIsSignup(!isSignup)}
-            className="text-zinc-500 hover:text-blue-400 text-xs font-medium transition-colors"
+            className="text-zinc-300 hover:text-blue-400 text-xs font-medium transition-colors"
           >
             {isSignup ? "Already have an account? Login" : "New here? Register a professional account"}
           </button>

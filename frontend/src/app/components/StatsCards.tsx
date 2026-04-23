@@ -65,7 +65,7 @@ export default function StatsCards({ stats }: StatsCardsProps) {
             />
 
             <span className="text-2xl block mb-3">{card.icon}</span>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-1">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-300 mb-1">
               {card.label}
             </p>
             <p className="text-3xl font-black tracking-tight" style={{ color: card.color }}>

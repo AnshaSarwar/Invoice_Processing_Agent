@@ -118,7 +118,7 @@ export default function UploadZone({ user, onComplete, onFileSelect, onOpenFile 
             </div>
             <div>
               <h3 className="text-xs font-black text-white uppercase tracking-tight truncate max-w-[200px]">{fileName}</h3>
-              <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{fileSize} • {statusMsg}</p>
+              <p className="text-[10px] text-zinc-300 font-bold uppercase tracking-widest">{fileSize} • {statusMsg}</p>
             </div>
           </div>
           
@@ -128,7 +128,7 @@ export default function UploadZone({ user, onComplete, onFileSelect, onOpenFile 
             )}
             <button 
               onClick={() => { setFileName(''); setIsUploading(false); }}
-              className="text-zinc-600 hover:text-white p-2 transition-colors"
+              className="text-zinc-400 hover:text-white p-2 transition-colors"
             >
               <span className="text-lg">✕</span>
             </button>
@@ -148,8 +148,8 @@ export default function UploadZone({ user, onComplete, onFileSelect, onOpenFile 
             <div className="w-16 h-16 rounded-3xl bg-white/[0.03] flex items-center justify-center mx-auto mb-6 border border-white/5">
               <span className="text-3xl opacity-50 group-hover:opacity-100 transition-opacity">📂</span>
             </div>
-            <h2 className="text-sm font-black text-zinc-400 uppercase tracking-[0.3em]">Drop Invoice</h2>
-            <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest mt-2">PDF Extraction Engine v1.0</p>
+            <h2 className="text-sm font-black text-zinc-300 uppercase tracking-[0.3em]">Drop Invoice</h2>
+            <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-widest mt-2">PDF Extraction Engine v1.0</p>
           </div>
         </div>
       )}

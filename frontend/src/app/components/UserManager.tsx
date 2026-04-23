@@ -130,7 +130,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
           <div key={idx} className="glass p-4 rounded-2xl border border-white/5 flex items-center gap-4">
             <div className="text-2xl">{s.icon}</div>
             <div>
-              <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest">{s.label}</p>
+              <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">{s.label}</p>
               <p className={`text-xl font-black ${s.color}`}>{s.value}</p>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
               className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 activeRoleFilter === role 
                 ? 'bg-white/10 text-white shadow-lg' 
-                : 'text-zinc-500 hover:text-zinc-300'
+                : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
               {role}
@@ -161,7 +161,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
             <input
               type="text"
               placeholder="Search by name or email..."
-              className="bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-sm text-white placeholder:text-zinc-600 focus:border-blue-500 outline-none transition-all w-full"
+              className="bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-sm text-white placeholder:text-zinc-400 focus:border-blue-500 outline-none transition-all w-full"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -189,7 +189,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-white/[0.02] text-zinc-500 text-[10px] uppercase font-bold tracking-widest border-b border-white/5">
+              <tr className="bg-white/[0.02] text-zinc-400 text-[10px] uppercase font-bold tracking-widest border-b border-white/5">
                 <th className="px-6 py-4">User</th>
                 <th className="px-6 py-4">Role</th>
                 <th className="px-6 py-4">Status</th>
@@ -226,7 +226,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                             <span className="text-[9px] px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded-md font-black uppercase tracking-tighter">You</span>
                           )}
                         </div>
-                        <div className="text-[11px] text-zinc-500 font-medium">
+                        <div className="text-[11px] text-zinc-300 font-medium">
                           {editingId === u.id ? (
                             <input
                               type="email"
@@ -262,7 +262,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-xs text-zinc-400 font-medium">
+                    <div className="text-xs text-zinc-300 font-medium">
                       {u.created_at ? new Date(u.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
                     </div>
                   </td>
@@ -306,12 +306,12 @@ export default function UserManager({ currentUser }: UserManagerProps) {
           <div className="bg-[#0c0c0e] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-black text-white tracking-tight">Provision New Member</h3>
-              <button onClick={() => setShowAddModal(false)} className="text-zinc-500 hover:text-white text-xl">✕</button>
+              <button onClick={() => setShowAddModal(false)} className="text-zinc-400 hover:text-white text-xl">✕</button>
             </div>
             
             <form onSubmit={handleAddUser} className="space-y-5">
               <div>
-                <label className="text-[10px] uppercase font-black text-zinc-500 mb-2 block tracking-widest">Username</label>
+                <label className="text-[10px] uppercase font-black text-zinc-400 mb-2 block tracking-widest">Username</label>
                 <input
                   type="text"
                   required
@@ -322,7 +322,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-black text-zinc-500 mb-2 block tracking-widest">Initial Password</label>
+                <label className="text-[10px] uppercase font-black text-zinc-400 mb-2 block tracking-widest">Initial Password</label>
                 <input
                   type="password"
                   required
@@ -333,7 +333,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-black text-zinc-500 mb-2 block tracking-widest">Email Address</label>
+                <label className="text-[10px] uppercase font-black text-zinc-400 mb-2 block tracking-widest">Email Address</label>
                 <input
                   type="email"
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white w-full outline-none focus:border-blue-500 transition-all"
@@ -343,7 +343,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-black text-zinc-500 mb-2 block tracking-widest">Access Role</label>
+                <label className="text-[10px] uppercase font-black text-zinc-400 mb-2 block tracking-widest">Access Role</label>
                 <div className="grid grid-cols-2 gap-3">
                   {['Operator'].map((role) => (
                     <button
@@ -353,14 +353,14 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                       className={`py-3 rounded-xl text-xs font-bold border transition-all ${
                         addForm.role === role 
                         ? 'bg-blue-500/10 border-blue-500 text-blue-400' 
-                        : 'bg-white/5 border-white/10 text-zinc-500 hover:border-white/20'
+                        : 'bg-white/5 border-white/10 text-zinc-400 hover:border-white/20'
                       }`}
                     >
                       {role}
                     </button>
                   ))}
                 </div>
-                <p className="text-[10px] text-zinc-600 mt-2 italic">
+                <p className="text-[10px] text-zinc-400 mt-2 italic">
                   * Note: Admin roles must be granted by modifying existing records.
                 </p>
               </div>
@@ -386,7 +386,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
             <div className="text-center">
               <div className="w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div>
               <h3 className="text-xl font-black text-white mb-2">Confirm Deletion</h3>
-              <p className="text-zinc-500 text-sm mb-8">
+              <p className="text-zinc-300 text-sm mb-8">
                 You are about to permanently remove this user account. This will revoke all access immediately. This action is irreversible.
               </p>
               <div className="flex gap-3">

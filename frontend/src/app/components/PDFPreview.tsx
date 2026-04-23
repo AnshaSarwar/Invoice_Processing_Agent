@@ -12,8 +12,8 @@ export default function PDFPreview({ url, fileName }: PDFPreviewProps) {
         <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-4 text-2xl">
           📄
         </div>
-        <p className="text-sm font-medium text-zinc-400">No Document Selected</p>
-        <p className="text-[11px] text-zinc-600 mt-1 max-w-[200px]">
+        <p className="text-sm font-medium text-zinc-300">No Document Selected</p>
+        <p className="text-[11px] text-zinc-400 mt-1 max-w-[200px]">
           Upload an invoice to see a live preview here while the AI works.
         </p>
       </div>
