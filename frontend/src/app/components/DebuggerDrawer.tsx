@@ -30,57 +30,52 @@ export default function DebuggerDrawer({ isOpen, onClose, events }: DebuggerDraw
 
   return (
     <aside
-      className={`fixed top-0 right-0 h-full w-[500px] bg-[#09090b] border-l border-white/10 z-[60] transform transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-[-20px_0_60px_rgba(0,0,0,0.8)] ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
+      className={`fixed top-0 right-0 h-full w-full max-w-lg bg-white border-l border-zinc-200 shadow-2xl z-50 transform transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
     >
       <div className="flex flex-col h-full">
         {/* Header */}
-        <div className="p-8 border-b border-white/10 flex justify-between items-center bg-black/40 backdrop-blur-2xl">
+        <div className="flex items-center justify-between p-6 border-b border-zinc-200">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <h3 className="text-xl font-black text-white uppercase tracking-tighter italic">Deep Diagnostics</h3>
-            </div>
-            <p className="text-[10px] text-zinc-300 uppercase tracking-[0.3em] font-bold">System-Level AI Trace logs</p>
+            <h2 className="text-lg font-black text-zinc-950 uppercase tracking-widest italic">Node Inspector</h2>
+            <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mt-0.5">Real-time signal analysis</p>
           </div>
           <button 
             onClick={onClose} 
-            className="w-10 h-10 flex items-center justify-center rounded-2xl bg-white/5 text-zinc-400 hover:text-white transition-all hover:bg-white/10 group"
+            className="w-10 h-10 flex items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:text-zinc-950 transition-all hover:bg-zinc-200 group"
           >
             <span className="text-2xl transition-transform group-hover:rotate-90">×</span>
           </button>
         </div>
 
         {/* Content */}
-        <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-10 custom-scrollbar bg-[#09090b]">
+        <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-10 custom-scrollbar bg-white">
           {events.length > 0 ? (
             events.map((evt, idx) => (
               <div key={idx} className="relative group animate-in fade-in slide-in-from-right-4 duration-500" style={{ animationDelay: `${idx * 50}ms` }}>
                 {/* Timeline connector */}
                 {idx < events.length - 1 && (
-                  <div className="absolute left-[7px] top-6 bottom-[-40px] w-[1px] bg-gradient-to-b from-blue-500/30 to-transparent" />
+                  <div className="absolute left-[7px] top-6 bottom-[-40px] w-[1px] bg-zinc-200" />
                 )}
                 
                 <div className="flex items-start gap-6">
                   {/* Timeline marker */}
                   <div className="mt-1.5 relative flex-shrink-0">
-                    <div className="w-[15px] h-[15px] rounded-full border-2 border-blue-500/50 bg-[#09090b] z-10 relative" />
+                    <div className="w-[15px] h-[15px] rounded-full border-2 border-blue-500 bg-white z-10 relative" />
                     <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-[4px]" />
                   </div>
 
                   <div className="flex-1 space-y-4">
                     <div className="flex justify-between items-center">
-                      <div className="flex flex-col">
-                        <span className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em] mb-1">Execution Node</span>
-                        <h4 className="text-base font-black text-white uppercase tracking-tight">
-                          {evt.node.replace('__', '').split('_').join(' ')}
-                        </h4>
+                      <div className="flex-1">
+                        <h4 className="text-xs font-black text-zinc-950 uppercase tracking-widest mb-2">{evt.node}</h4>
+                        <pre className="text-[10px] font-mono p-4 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-700 overflow-x-auto">
+                          {JSON.stringify(evt.update || {}, null, 2)}
+                        </pre>
                       </div>
                       <div className={`px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border ${
                         evt.status === 'failed' || evt.status === 'error'
-                          ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' 
-                          : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                          ? 'bg-rose-50 text-rose-600 border-rose-200' 
+                          : 'bg-emerald-50 text-emerald-600 border-emerald-200'
                       }`}>
                         {evt.status}
                       </div>

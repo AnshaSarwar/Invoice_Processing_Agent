@@ -3,15 +3,15 @@
 :root {
   --background: #ffffff;
   --foreground: #09090b;
-  --card: #f4f4f5;
+  --card: #ffffff;
   --card-foreground: #09090b;
   --primary: #2563eb;
   --primary-foreground: #ffffff;
-  --secondary: #f1f1f2;
-  --accent: #f1f1f2;
+  --secondary: #f4f4f5;
+  --accent: #f4f4f5;
   --destructive: #dc2626;
-  --border: #e2e2e7;
-  --input: #e2e2e7;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
   --ring: #2563eb;
   --radius: 0.75rem;
 }
@@ -20,41 +20,38 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
-  background-image: radial-gradient(circle at top center, rgba(37, 99, 235, 0.05), transparent 40%),
-                    radial-gradient(circle at bottom left, rgba(147, 51, 234, 0.03), transparent 40%);
+  background-image: radial-gradient(circle at top center, rgba(37, 99, 235, 0.03), transparent 40%);
   background-attachment: fixed;
   min-height: 100vh;
 }
 
-/* glassmorphism */
+/* crisp containers */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
   border-radius: var(--radius);
   padding: 1.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: #d1d1d6;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
 /* scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-track { background: #f4f4f5; }
+::-webkit-scrollbar-thumb { background: #d1d1d6; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
 
 /* animations */
 @keyframes spin {
@@ -94,7 +91,7 @@ body {
   border-radius: 50%;
   animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
-.status-green-ring::before { background-color: rgba(34, 197, 94, 0.3); }
+.status-green-ring::before { background-color: rgba(34, 197, 94, 0.4); }
 
 /* select dropdown */
 select option {

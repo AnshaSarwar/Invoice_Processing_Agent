@@ -37,7 +37,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
   };
 
   return (
-    <div className="w-full max-w-sm glass-card border-white/5 shadow-2xl">
+    <div className="w-full max-w-sm bg-white p-8 rounded-3xl border border-zinc-200 shadow-xl">
       <div className="text-center mb-8">
         <span className="text-5xl mb-4 block">🤖</span>
         <h1 className="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
@@ -53,7 +53,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
           <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Username</label>
           <input
             type="text" required
-            className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
+            className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-950 focus:border-blue-500 outline-none transition-all placeholder:text-zinc-400"
             value={authData.username}
             onChange={e => setAuthData({ ...authData, username: e.target.value })}
           />
@@ -64,7 +64,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
               <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Email (Optional)</label>
               <input
                 type="email"
-                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-950 focus:border-blue-500 outline-none transition-all placeholder:text-zinc-400"
                 value={authData.email}
                 onChange={e => setAuthData({ ...authData, email: e.target.value })}
               />
@@ -72,7 +72,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
             <div>
               <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Role</label>
               <select
-                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-950 focus:border-blue-500 outline-none transition-all"
                 value={authData.role}
                 onChange={e => setAuthData({ ...authData, role: e.target.value })}
               >
@@ -87,7 +87,7 @@ export default function AuthCard({ onAuthSuccess }: AuthCardProps) {
           <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">Password</label>
           <input
             type="password" required
-            className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
+            className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-950 focus:border-blue-500 outline-none transition-all placeholder:text-zinc-400"
             value={authData.password}
             onChange={e => setAuthData({ ...authData, password: e.target.value })}
           />

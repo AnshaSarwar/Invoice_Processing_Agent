@@ -123,14 +123,14 @@ export default function UserManager({ currentUser }: UserManagerProps) {
       {/* Stats Summary Bar */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {[
-          { label: 'Total Users', value: stats.total, color: 'text-white', icon: '👥' },
-          { label: 'Admins', value: stats.admins, color: 'text-red-400', icon: '🛡️' },
-          { label: 'Operators', value: stats.operators, color: 'text-blue-400', icon: '⚙️' },
+          { label: 'Total Users', value: stats.total, color: 'text-zinc-950', icon: '👥' },
+          { label: 'Admins', value: stats.admins, color: 'text-red-600', icon: '🛡️' },
+          { label: 'Operators', value: stats.operators, color: 'text-blue-600', icon: '⚙️' },
         ].map((s, idx) => (
-          <div key={idx} className="glass p-4 rounded-2xl border border-white/5 flex items-center gap-4">
+          <div key={idx} className="bg-white p-4 rounded-2xl border border-zinc-200 flex items-center gap-4 shadow-sm">
             <div className="text-2xl">{s.icon}</div>
             <div>
-              <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">{s.label}</p>
+              <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest">{s.label}</p>
               <p className={`text-xl font-black ${s.color}`}>{s.value}</p>
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-white/[0.02] text-zinc-400 text-[10px] uppercase font-bold tracking-widest border-b border-white/5">
+              <tr className="bg-zinc-50 text-zinc-500 text-[10px] uppercase font-bold tracking-widest border-b border-zinc-200">
                 <th className="px-6 py-4">User</th>
                 <th className="px-6 py-4">Role</th>
                 <th className="px-6 py-4">Status</th>
@@ -216,17 +216,17 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 <tr key={u.id} className="group hover:bg-white/[0.02] transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center text-sm font-bold text-white uppercase">
+                      <div className="w-9 h-9 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-950 uppercase">
                         {u.username[0]}
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-white flex items-center gap-2">
+                        <div className="text-sm font-bold text-zinc-950 flex items-center gap-2">
                           {u.username}
                           {u.id === currentUser.id && (
-                            <span className="text-[9px] px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded-md font-black uppercase tracking-tighter">You</span>
+                            <span className="text-[9px] px-1.5 py-0.5 bg-zinc-100 text-zinc-500 rounded-md font-black uppercase tracking-tighter">You</span>
                           )}
                         </div>
-                        <div className="text-[11px] text-zinc-300 font-medium">
+                        <div className="text-[11px] text-zinc-500 font-medium">
                           {editingId === u.id ? (
                             <input
                               type="email"
@@ -262,7 +262,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-xs text-zinc-300 font-medium">
+                    <div className="text-xs text-zinc-600 font-medium">
                       {u.created_at ? new Date(u.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
                     </div>
                   </td>
@@ -302,11 +302,11 @@ export default function UserManager({ currentUser }: UserManagerProps) {
 
       {/* Add User Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-[#0c0c0e] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white border border-zinc-200 w-full max-w-md rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-black text-white tracking-tight">Provision New Member</h3>
-              <button onClick={() => setShowAddModal(false)} className="text-zinc-400 hover:text-white text-xl">✕</button>
+              <h3 className="text-xl font-black text-zinc-950 tracking-tight">Provision New Member</h3>
+              <button onClick={() => setShowAddModal(false)} className="text-zinc-400 hover:text-zinc-950 text-xl">✕</button>
             </div>
             
             <form onSubmit={handleAddUser} className="space-y-5">
@@ -384,9 +384,9 @@ export default function UserManager({ currentUser }: UserManagerProps) {
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300">
           <div className="bg-[#0c0c0e] border border-red-500/20 w-full max-w-sm rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300">
             <div className="text-center">
-              <div className="w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div>
-              <h3 className="text-xl font-black text-white mb-2">Confirm Deletion</h3>
-              <p className="text-zinc-300 text-sm mb-8">
+              <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div>
+              <h3 className="text-xl font-black text-zinc-950 mb-2">Confirm Deletion</h3>
+              <p className="text-zinc-600 text-sm mb-8">
                 You are about to permanently remove this user account. This will revoke all access immediately. This action is irreversible.
               </p>
               <div className="flex gap-3">

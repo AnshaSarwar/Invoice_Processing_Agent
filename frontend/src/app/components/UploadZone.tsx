@@ -108,7 +108,7 @@ export default function UploadZone({ user, onComplete, onFileSelect, onOpenFile 
       />
 
       {fileName ? (
-        <div className="flex items-center justify-between p-4 bg-white/[0.03] border border-white/10 rounded-2xl animate-in fade-in slide-in-from-top-2 duration-500">
+        <div className="flex items-center justify-between p-4 bg-zinc-50 border border-zinc-200 rounded-2xl animate-in fade-in slide-in-from-top-2 duration-500">
           <div 
             onClick={onOpenFile}
             className="flex items-center gap-4 cursor-pointer group"
@@ -117,8 +117,8 @@ export default function UploadZone({ user, onComplete, onFileSelect, onOpenFile 
               <span className="text-xl">📄</span>
             </div>
             <div>
-              <h3 className="text-xs font-black text-white uppercase tracking-tight truncate max-w-[200px]">{fileName}</h3>
-              <p className="text-[10px] text-zinc-300 font-bold uppercase tracking-widest">{fileSize} • {statusMsg}</p>
+              <h3 className="text-xs font-black text-zinc-950 uppercase tracking-tight truncate max-w-[200px]">{fileName}</h3>
+              <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{fileSize} • {statusMsg}</p>
             </div>
           </div>
           
@@ -128,7 +128,7 @@ export default function UploadZone({ user, onComplete, onFileSelect, onOpenFile 
             )}
             <button 
               onClick={() => { setFileName(''); setIsUploading(false); }}
-              className="text-zinc-400 hover:text-white p-2 transition-colors"
+              className="text-zinc-400 hover:text-zinc-950 p-2 transition-colors"
             >
               <span className="text-lg">✕</span>
             </button>
@@ -141,15 +141,15 @@ export default function UploadZone({ user, onComplete, onFileSelect, onOpenFile 
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
           className={`flex items-center justify-center p-12 rounded-[2.5rem] border-2 border-dashed transition-all duration-500 ${
-            isDragging ? 'border-blue-500 bg-blue-500/5 scale-[0.98]' : 'border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02]'
+            isDragging ? 'border-blue-500 bg-blue-50 scale-[0.98]' : 'border-zinc-200 bg-zinc-50 hover:border-zinc-300 hover:bg-zinc-100'
           }`}
         >
           <div className="text-center">
             <div className="w-16 h-16 rounded-3xl bg-white/[0.03] flex items-center justify-center mx-auto mb-6 border border-white/5">
               <span className="text-3xl opacity-50 group-hover:opacity-100 transition-opacity">📂</span>
             </div>
-            <h2 className="text-sm font-black text-zinc-300 uppercase tracking-[0.3em]">Drop Invoice</h2>
-            <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-widest mt-2">PDF Extraction Engine v1.0</p>
+            <h2 className="text-sm font-black text-zinc-700 uppercase tracking-[0.3em]">Drop Invoice</h2>
+            <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mt-2">PDF Extraction Engine v1.0</p>
           </div>
         </div>
       )}

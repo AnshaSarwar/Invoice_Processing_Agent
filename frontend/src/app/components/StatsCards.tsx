@@ -11,33 +11,33 @@ const cards = [
     key: 'total',
     label: 'Total Processed',
     icon: '📄',
-    gradient: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(99,102,241,0.08))',
-    border: 'rgba(59,130,246,0.25)',
-    color: '#93c5fd',
+    gradient: '#f8fafc',
+    border: '#e2e8f0',
+    color: '#2563eb',
   },
   {
     key: 'successful',
     label: 'Matched',
     icon: '✅',
-    gradient: 'linear-gradient(135deg, rgba(34,197,94,0.15), rgba(16,185,129,0.08))',
-    border: 'rgba(34,197,94,0.25)',
-    color: '#86efac',
+    gradient: '#f0fdf4',
+    border: '#dcfce7',
+    color: '#16a34a',
   },
   {
     key: 'failed',
     label: 'Failed',
     icon: '❌',
-    gradient: 'linear-gradient(135deg, rgba(239,68,68,0.15), rgba(244,63,94,0.08))',
-    border: 'rgba(239,68,68,0.25)',
-    color: '#fca5a5',
+    gradient: '#fef2f2',
+    border: '#fee2e2',
+    color: '#dc2626',
   },
   {
     key: 'avg_time',
     label: 'Avg. Time',
     icon: '⏱️',
-    gradient: 'linear-gradient(135deg, rgba(168,85,247,0.15), rgba(139,92,246,0.08))',
-    border: 'rgba(168,85,247,0.25)',
-    color: '#c4b5fd',
+    gradient: '#faf5ff',
+    border: '#f3e8ff',
+    color: '#9333ea',
     suffix: 's',
   },
 ] as const;
@@ -52,20 +52,18 @@ export default function StatsCards({ stats }: StatsCardsProps) {
         return (
           <div
             key={card.key}
-            className="relative overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02] group"
+            className="relative overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:shadow-md group border"
             style={{
-              background: card.gradient,
-              border: `1px solid ${card.border}`,
+              backgroundColor: card.gradient,
+              borderColor: card.border,
             }}
           >
-            {/* glow effect */}
-            <div
-              className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-              style={{ background: card.color, filter: 'blur(20px)' }}
-            />
-
-            <span className="text-2xl block mb-3">{card.icon}</span>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-300 mb-1">
+            {/* pulse icon */}
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-xl mb-3 shadow-sm border border-zinc-100 group-hover:scale-110 transition-transform">
+              {card.icon}
+            </div>
+            
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-1">
               {card.label}
             </p>
             <p className="text-3xl font-black tracking-tight" style={{ color: card.color }}>

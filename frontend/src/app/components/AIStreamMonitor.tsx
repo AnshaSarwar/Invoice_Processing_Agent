@@ -40,14 +40,14 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
   }
 
   return (
-    <div className="relative py-12 border-t border-white/5">
+    <div className="glass rounded-[2.5rem] p-8 relative overflow-hidden group border border-zinc-200">
       <div className="flex items-center gap-4 mb-10">
-        <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100">
           <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
         </div>
         <div>
-          <h2 className="text-sm font-black text-white uppercase tracking-widest italic">AI Processing Pipeline</h2>
-          <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-widest mt-0.5">Live Agent Orchestration</p>
+          <h2 className="text-sm font-black text-zinc-950 uppercase tracking-widest italic">AI Processing Pipeline</h2>
+          <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mt-0.5">Live Agent Orchestration</p>
         </div>
       </div>
 
@@ -68,12 +68,12 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
               >
                 {/* Connector line */}
                 {idx > 0 && (
-                  <div className="absolute top-[11px] right-[50%] w-full h-[1px] bg-gradient-to-r from-white/5 to-blue-500/30 -z-10" />
+                  <div className="absolute top-[11px] right-[50%] w-full h-[1px] bg-gradient-to-r from-zinc-200 to-blue-500/30 -z-10" />
                 )}
 
                 {/* Pulse dot */}
-                <div className={`w-[22px] h-[22px] rounded-full flex items-center justify-center bg-[#09090b] border-2 transition-all duration-500 z-10 ${
-                  isLast ? 'border-blue-500 scale-110 shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-zinc-800'
+                <div className={`w-[22px] h-[22px] rounded-full flex items-center justify-center bg-white border-2 transition-all duration-500 z-10 ${
+                  isLast ? 'border-blue-500 scale-110 shadow-lg' : 'border-zinc-200'
                 }`}>
                   <div className={`w-2 h-2 rounded-full ${statusColor} ${isLast ? 'animate-pulse' : ''}`} />
                 </div>
@@ -81,7 +81,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
                 {/* Node label */}
                 <div className="mt-6 text-center space-y-1.5 px-4 flex flex-col items-center">
                   <h4 className={`text-[10px] font-black uppercase tracking-widest transition-colors ${
-                    isLast ? 'text-blue-400' : 'text-zinc-400 group-hover:text-white'
+                    isLast ? 'text-blue-600' : 'text-zinc-500 group-hover:text-zinc-950'
                   }`}>
                     {evt.node.replace('__', '').split('_').join(' ')}
                   </h4>
@@ -100,7 +100,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
                      evt.status}
                   </div>
 
-                  <p className="text-[10px] text-zinc-300 font-medium leading-relaxed line-clamp-2 italic group-hover:opacity-100 transition-opacity mt-2">
+                  <p className="text-[10px] text-zinc-600 font-medium leading-relaxed line-clamp-2 italic group-hover:opacity-100 transition-opacity mt-2">
                     {evt.reason || evt.update?.message || (
                       evt.node.includes('parse') ? "Extracting invoice data..." :
                       evt.node.includes('validate') ? "Verifying document structure..." :
