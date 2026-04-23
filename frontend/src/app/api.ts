@@ -4,7 +4,7 @@ export const API_BASE_URL = '/api/v1';
 // EventSource (SSE) does NOT go through Next.js proxy, so must hit backend directly
 export const STREAM_BASE_URL = 'http://localhost:8000/api/v1';
 
-// ── Types ────────────────────────────────────────────────────
+// types
 
 export interface ProcessResponse {
   status: string;
@@ -49,7 +49,7 @@ export interface UserUpdate {
   password?: string;
 }
 
-// ── Helpers ──────────────────────────────────────────────────
+// helpers
 
 const getAuthHeaders = (user: User): Record<string, string> => ({
   'Authorization': `Bearer ${user.access_token}`,
@@ -64,7 +64,7 @@ async function handleResponse<T>(res: Response): Promise<T> {
   return res.json();
 }
 
-// ── API Client ───────────────────────────────────────────────
+// api client
 
 export const api = {
   // Auth

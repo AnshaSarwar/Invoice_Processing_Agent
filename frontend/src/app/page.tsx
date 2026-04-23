@@ -46,7 +46,7 @@ export default function DashboardPage() {
     setActiveFileName(file.name);
   };
 
-  // ── Session Restore ──────────────────────────────────────────
+  // session restore
   useEffect(() => {
     const savedUser = localStorage.getItem('invosync_user');
     if (savedUser) {
@@ -68,7 +68,7 @@ export default function DashboardPage() {
     setStreamEvents([]);
   };
 
-  // ── Data Fetching ────────────────────────────────────────────
+  // data fetching
   const fetchData = useCallback(async () => {
     if (!user) return;
     try {
@@ -158,7 +158,7 @@ export default function DashboardPage() {
 
   return (
     <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-all duration-500 font-sans">
-      {/* ── PDF MODAL ────────────────────────────────────────── */}
+      {/* pdf modal */}
       {isPDFModalOpen && activeFileUrl && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-3xl animate-in fade-in duration-500">
           <div className="relative w-full max-w-6xl h-full bg-[var(--background)] rounded-[3rem] overflow-hidden border border-zinc-200 shadow-[0_0_100px_rgba(0,0,0,0.2)]">
@@ -178,7 +178,7 @@ export default function DashboardPage() {
       )}
 
       <div className="container mx-auto px-6 py-12 max-w-5xl">
-        {/* ── Header ──────────────────────────────────────────── */}
+        {/* header */}
         <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6">
           <div>
             <h1 className="text-2xl font-black tracking-tight uppercase italic mb-1"
@@ -229,7 +229,7 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        {/* ── Dashboard Tab ──────────────────────────────────── */}
+        {/* dashboard tab */}
         {activeTab === 'dashboard' && (
           <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <StatsCards stats={stats} />

@@ -15,8 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      {/* Build ID: 1.0.9-neural-refresh */}
+    <html lang="en">
       <body className={`${inter.variable} antialiased min-h-screen`}>
         <div className="relative flex flex-col min-h-screen">
           <main className="flex-grow flex flex-col">

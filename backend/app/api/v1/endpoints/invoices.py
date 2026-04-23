@@ -138,7 +138,7 @@ async def stream_processing(task_id: str, user_id: int = Depends(deps.get_curren
                             po = node_data.get("invoice_data", {}).get("po_number", "N/A")
                             reason = f"Cross-referencing with PO: {po}"
                         else:
-                            reason = "Processing neural data fragments..."
+                            reason = "Analyzing document structure..."
 
                     payload = {
                         "node": node_name.replace("__", ""),
