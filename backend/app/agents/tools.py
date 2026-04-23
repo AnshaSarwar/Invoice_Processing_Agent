@@ -25,8 +25,8 @@ from app.schemas.agent_schemas import InvoiceExtraction
 logger = logging.getLogger(__name__)
 
 
-# ── Model Init ────────────────────────────────────────────────────────────────
-# Fail-safe key lookup
+# model init
+# fail-safe key lookup
 gemini_key = settings.GEMINI_API_KEY or os.getenv("GEMINI_API_KEY")
 
 model = ChatGoogleGenerativeAI(
@@ -38,7 +38,7 @@ model = ChatGoogleGenerativeAI(
 db_manager = DatabaseManager(settings.get_database_url())
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# helpers
 def normalize_number(value) -> float:
     """
     Converts any value to a clean float.
@@ -97,7 +97,7 @@ def _is_missing(value, field_type: str = "string") -> bool:
     return False
 
 
-#  Prompt 
+# prompt
 INVOICE_PROMPT = ChatPromptTemplate.from_template("""
 You are a specialized financial document parser with expertise in accounts payable.
 Your task is to extract structured data from invoice documents with maximum accuracy.
@@ -191,7 +191,7 @@ Invoice Text:
 extraction_chain = INVOICE_PROMPT | model | JsonOutputParser()
 
 
-# Invoice Parsing 
+# invoice parsing 
 @retry(
     stop=stop_after_attempt(settings.max_retries),
     wait=wait_exponential(multiplier=1, min=2, max=10),
@@ -206,14 +206,14 @@ async def _parse_invoice_impl(filepath: str) -> str:
         return json.dumps({"is_invoice": False, "reason": "File not found"})
 
     try:
-        # 1. Extract Text from PDF (Matches Colab logic)
+        # Extract Text from PDF (Matches Colab logic)
         parser = LlamaParse(api_key=settings.llama_cloud_api_key, language='en', result_type="markdown")
         invoice_documents = await parser.aload_data(filepath)
         
         # Unpack LlamaParse documents into a single text block
         invoice_text = "\n\n".join([doc.text for doc in invoice_documents])
 
-        # 2. Extract Data — JsonOutputParser → Pydantic validation
+        # Extract Data — JsonOutputParser → Pydantic validation
         # This is the most reliable approach: parse via JsonOutputParser (v1 API,
         # works with all Gemini models), then immediately validate through the
         # InvoiceExtraction Pydantic schema for type coercion and field enforcement.
@@ -230,7 +230,7 @@ async def _parse_invoice_impl(filepath: str) -> str:
             logger.warning(f"Pydantic validation failed: {ve}. Using raw dict as fallback.")
             extracted_data = raw_dict
 
-        # 3. Post-Process & Validate
+        # Post-Process & Validate
         if extracted_data.get("is_invoice"):
             extracted_data = _validate_amounts(extracted_data)
             # Re-verify confidence based on business rules
@@ -284,7 +284,7 @@ async def parse_invoice(filepath: str) -> str:
         })
 
 
-# Amount Validation 
+# amount validation 
 def _validate_amounts(data: dict) -> dict:
     """
     Validates that extracted amounts are internally consistent.
@@ -317,7 +317,7 @@ def _validate_amounts(data: dict) -> dict:
     return data
 
 
-# Confidence Scoring 
+# confidence scoring 
 def _adjust_confidence(data: dict) -> dict:
     """
     Adjusts confidence score based on missing critical and important fields.
@@ -363,7 +363,7 @@ def _adjust_confidence(data: dict) -> dict:
     return data
 
 
-# PO Retrieval 
+# po retrieval 
 @tool
 def get_po_data_from_db(po_number: str) -> str:
     """

@@ -7,12 +7,12 @@ from langgraph.checkpoint.memory import MemorySaver
 
 from app.agents.tools import parse_invoice, get_po_data_from_db, compare_po_and_invoice
 
-# Setup
+# setup
 logger = logging.getLogger(__name__)
 memory = MemorySaver()
 
 
-# State Definition
+# state definition
 class AgentState(TypedDict, total=False):
     """The global state object for the InvoSync matching pipeline."""
     filepath: str
@@ -25,7 +25,7 @@ class AgentState(TypedDict, total=False):
     requires_human_review: bool
 
 
-# Agent Nodes
+# agent nodes
 async def parse_node(state: AgentState) -> dict:
     logger.info(f"[parse_node] Parsing: {state.get('filepath')}")
     try:
@@ -72,7 +72,7 @@ async def validate_node(state: AgentState) -> dict:
             "error_message": "PO number missing from invoice — cannot match to purchase order."
         }
 
-    # Flag low confidence for human review
+    # flag low confidence for review
     confidence = float(data.get("confidence_score") or 1.0)
     if confidence < 0.5:
         logger.warning(f"[validate_node] Low confidence score: {confidence}")
@@ -161,7 +161,7 @@ async def compare_node(state: AgentState) -> dict:
     }
 
 
-# Routing Logic
+# routing logic
 def should_continue(state: AgentState) -> str:
     """Checks if the invoice passed validation before attempting PO lookup."""
     return "continue" if state.get("status") == "validated" else "end"
@@ -171,7 +171,7 @@ def po_fetched_or_end(state: AgentState) -> str:
     return "continue" if state.get("status") == "po_found" else "end"
 
 
-# Graph Orchestration
+# graph orchestration
 def build_graph():
     graph = StateGraph(AgentState)
 

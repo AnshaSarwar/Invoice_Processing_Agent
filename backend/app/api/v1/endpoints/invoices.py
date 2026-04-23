@@ -38,7 +38,7 @@ async def upload_invoice(
         raise HTTPException(400, "Only PDF files supported")
     
     task_id = f"task_{int(time.time() * 1000)}"
-    # Sanitize filename to prevent directory traversal
+    # sanitize filename
     safe_filename = Path(file.filename).name
     filepath = settings.temp_dir / f"{task_id}_{safe_filename}"
     
@@ -83,10 +83,9 @@ async def stream_global():
 @router.get("/stream/{task_id}", dependencies=[Depends(deps.RoleChecker(UserRole.OPERATOR))])
 async def stream_processing(task_id: str, user_id: int = Depends(deps.get_current_user_id)):
     """
-    Executes the AI orchestration pipeline and streams progress via SSE.
-    SECURITY: Resolves the filepath based on task_id to prevent traversal.
+    Executes the AI orchestration pipeline and streams progress via sse.
     """
-    # Find the file in temp_dir that starts with this task_id
+    # resolve filepath
     files = list(settings.temp_dir.glob(f"{task_id}_*"))
     if not files:
         raise HTTPException(status_code=404, detail="Processing task not found or expired.")
@@ -118,16 +117,16 @@ async def stream_processing(task_id: str, user_id: int = Depends(deps.get_curren
                 for node_name, node_data in event.items():
                     status_str = node_data.get("status", "working")
                     
-                    # Filter internal fields 
+                    # filter internal fields
                     filtered_node_data = {k: v for k, v in node_data.items() if k != "_original_text" and not k.startswith("_")}
                     
-                    # Internal node labels mapping
+                    # internal node labels
                     if node_name == "__start__":
                         filtered_node_data = {"session": "initialized", "message": "AI agent woke up. Awaiting file analysis..."}
                     elif node_name == "__end__":
                         filtered_node_data = {"session": "concluded", "message": "All AI nodes finished. Process ended."}
 
-                    # Generate 'short reason' for better UI feedback
+                    # generate short reason
                     reason = node_data.get("message") or filtered_node_data.get("message")
                     if not reason:
                         if node_name == "extract_invoice":
@@ -150,20 +149,20 @@ async def stream_processing(task_id: str, user_id: int = Depends(deps.get_curren
                         "source": "upload"
                     }
                     
-                    # Broadcast globally
+                    # broadcast globally
                     await global_event_bus.broadcast(payload)
                     
                     yield f"data: {json.dumps(payload)}\n\n"
-                    # Small delay to ensure UI can keep up with rapid node transitions
+                    # artificial delay
                     # Reduced from 0.4s to 0.1s for better efficiency while maintaining visual updates
                     await asyncio.sleep(0.1)
                 
-            # Log final results to DB once stream finishes
+            # log results to db
             final_state = await invoice_matching_app.aget_state(config)
             processing_time = time.time() - start_time
             monitor.log_processing(filepath, final_state.values, processing_time, owner_id=user_id)
             
-            # Final payload
+            # final payload
             final_payload = {'node': 'end', 'status': 'completed', 'task_id': task_id, 'message': 'Pipeline execution finished successfully.'}
             await global_event_bus.broadcast(final_payload)
             yield f"data: {json.dumps(final_payload)}\n\n"
@@ -175,7 +174,7 @@ async def stream_processing(task_id: str, user_id: int = Depends(deps.get_curren
             yield f"data: {json.dumps(err_payload)}\n\n"
             
         finally:
-            # CLEANUP: Delete the file to prevent orphans
+            # cleanup temp file
             try:
                 if os.path.exists(filepath):
                     os.remove(filepath)
