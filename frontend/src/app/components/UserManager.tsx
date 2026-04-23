@@ -137,17 +137,17 @@ export default function UserManager({ currentUser }: UserManagerProps) {
         ))}
       </div>
 
-      {/* Controls */}
+      {/* controls */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-        <div className="flex bg-zinc-900/50 p-1 rounded-xl border border-white/5">
+        <div className="flex bg-zinc-100 p-1 rounded-xl border border-zinc-200">
           {['All', 'Admin', 'Operator'].map((role) => (
             <button
               key={role}
               onClick={() => setActiveRoleFilter(role as any)}
               className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 activeRoleFilter === role 
-                ? 'bg-white/10 text-white shadow-lg' 
-                : 'text-zinc-400 hover:text-zinc-200'
+                ? 'bg-white text-zinc-900 shadow-sm' 
+                : 'text-zinc-500 hover:text-zinc-800'
               }`}
             >
               {role}
@@ -161,7 +161,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
             <input
               type="text"
               placeholder="Search by name or email..."
-              className="bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-sm text-white placeholder:text-zinc-400 focus:border-blue-500 outline-none transition-all w-full"
+              className="bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-blue-500 outline-none transition-all w-full"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -209,7 +209,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 <tr>
                   <td colSpan={5} className="px-6 py-20 text-center">
                     <div className="text-4xl mb-4">🌑</div>
-                    <p className="text-zinc-500 text-sm font-medium">No members found matching your criteria.</p>
+                    <p className="text-zinc-600 text-sm mt-2 font-medium">No members found matching your criteria.</p>
                   </td>
                 </tr>
               ) : filteredUsers.map((u) => (
@@ -244,7 +244,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                   <td className="px-6 py-4">
                     {editingId === u.id ? (
                       <select
-                        className="bg-zinc-800 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-blue-500"
+                        className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
                         value={editForm.role || u.role}
                         onChange={(e) => setEditForm({ ...editForm, role: e.target.value as any })}
                       >
@@ -315,7 +315,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 <input
                   type="text"
                   required
-                  className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white w-full outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
                   placeholder="e.g. jdoe_ops"
                   value={addForm.username}
                   onChange={(e) => setAddForm({ ...addForm, username: e.target.value })}
@@ -326,7 +326,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 <input
                   type="password"
                   required
-                  className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white w-full outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
                   placeholder="••••••••"
                   value={addForm.password}
                   onChange={(e) => setAddForm({ ...addForm, password: e.target.value })}
@@ -336,7 +336,7 @@ export default function UserManager({ currentUser }: UserManagerProps) {
                 <label className="text-[10px] uppercase font-black text-zinc-400 mb-2 block tracking-widest">Email Address</label>
                 <input
                   type="email"
-                  className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white w-full outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:border-blue-500 outline-none transition-all"
                   placeholder="j.doe@company.com"
                   value={addForm.email}
                   onChange={(e) => setAddForm({ ...addForm, email: e.target.value })}

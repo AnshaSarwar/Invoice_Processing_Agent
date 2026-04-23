@@ -22,7 +22,7 @@ export default function PDFPreview({ url, fileName }: PDFPreviewProps) {
 
   return (
     <div className="flex flex-col h-full bg-[#18181b] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-      {/* Viewer Header */}
+      {/* Viewer header */}
       <div className="px-4 py-3 bg-white/5 border-b border-white/10 flex justify-between items-center">
         <div className="flex items-center gap-2 overflow-hidden">
           <span className="text-xs">📄</span>
@@ -34,7 +34,7 @@ export default function PDFPreview({ url, fileName }: PDFPreviewProps) {
         </div>
       </div>
 
-      {/* Actual PDF Iframe */}
+      {/* PDF iframe */}
       <div className="flex-1 relative bg-[#2a2a2e]">
         <iframe
           src={`${url}#toolbar=0&navpanes=0&scrollbar=0`}
@@ -42,7 +42,7 @@ export default function PDFPreview({ url, fileName }: PDFPreviewProps) {
           title="Invoice Preview"
         />
         
-        {/* Subtle glass overlay for aesthetics */}
+        {/* Glass overlay */}
         <div className="absolute inset-0 pointer-events-none border border-white/5 rounded-b-2xl" />
       </div>
     </div>

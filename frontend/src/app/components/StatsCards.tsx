@@ -58,7 +58,7 @@ export default function StatsCards({ stats }: StatsCardsProps) {
               border: `1px solid ${card.border}`,
             }}
           >
-            {/* Glow effect */}
+            {/* glow effect */}
             <div
               className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
               style={{ background: card.color, filter: 'blur(20px)' }}

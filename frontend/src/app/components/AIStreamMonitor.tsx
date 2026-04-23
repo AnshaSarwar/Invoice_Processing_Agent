@@ -61,24 +61,24 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
           
           return (
             <div key={idx} className="flex items-start flex-shrink-0">
-              {/* Node Column */}
+              {/* Node column */}
               <div 
                 onClick={() => onSelectNode(evt)}
                 className="group relative flex flex-col items-center w-48 transition-all duration-300 cursor-pointer"
               >
-                {/* Connector Line (Behind) */}
+                {/* Connector line */}
                 {idx > 0 && (
                   <div className="absolute top-[11px] right-[50%] w-full h-[1px] bg-gradient-to-r from-white/5 to-blue-500/30 -z-10" />
                 )}
 
-                {/* Pulse Dot */}
+                {/* Pulse dot */}
                 <div className={`w-[22px] h-[22px] rounded-full flex items-center justify-center bg-[#09090b] border-2 transition-all duration-500 z-10 ${
                   isLast ? 'border-blue-500 scale-110 shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-zinc-800'
                 }`}>
                   <div className={`w-2 h-2 rounded-full ${statusColor} ${isLast ? 'animate-pulse' : ''}`} />
                 </div>
 
-                {/* Node Label */}
+                {/* Node label */}
                 <div className="mt-6 text-center space-y-1.5 px-4 flex flex-col items-center">
                   <h4 className={`text-[10px] font-black uppercase tracking-widest transition-colors ${
                     isLast ? 'text-blue-400' : 'text-zinc-400 group-hover:text-white'
@@ -111,7 +111,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
                   </p>
                 </div>
 
-                {/* Active Indicator */}
+                {/* Active indicator */}
                 {isLast && (
                   <div className="absolute -top-6 animate-bounce">
                     <span className="text-[8px] font-black text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20 uppercase tracking-widest">Active</span>
@@ -119,7 +119,7 @@ export default function AIStreamMonitor({ events, isStreaming, onSelectNode }: A
                 )}
               </div>
 
-              {/* Spacing Connector */}
+              {/* Spacing connector */}
               {idx < events.length - 1 && (
                 <div className="w-12 h-[1px] bg-white/10 mt-[11px] flex-shrink-0" />
               )}

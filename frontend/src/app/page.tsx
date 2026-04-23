@@ -148,7 +148,7 @@ export default function DashboardPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#09090b] flex items-center justify-center p-6">
+      <div className="min-h-screen bg-[var(--background)] flex items-center justify-center p-6">
         <AuthCard onAuthSuccess={handleAuthSuccess} />
       </div>
     );
@@ -157,11 +157,11 @@ export default function DashboardPage() {
   const roleBadgeColor = isAdmin ? 'text-red-400' : 'text-blue-400';
 
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-[#fafafa] transition-all duration-500 font-sans">
+    <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-all duration-500 font-sans">
       {/* ── PDF MODAL ────────────────────────────────────────── */}
       {isPDFModalOpen && activeFileUrl && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-3xl animate-in fade-in duration-500">
-          <div className="relative w-full max-w-6xl h-full bg-[#09090b] rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.8)]">
+          <div className="relative w-full max-w-6xl h-full bg-[var(--background)] rounded-[3rem] overflow-hidden border border-zinc-200 shadow-[0_0_100px_rgba(0,0,0,0.2)]">
             <div className="absolute top-8 right-8 z-[110]">
               <button 
                 onClick={() => setIsPDFModalOpen(false)}
@@ -185,9 +185,9 @@ export default function DashboardPage() {
                 style={{ background: 'linear-gradient(to right, #60a5fa, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               InvoSync
             </h1>
-            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">
               <span>{user.username}</span>
-              <span className="w-1 h-1 rounded-full bg-zinc-800" />
+              <span className="w-1 h-1 rounded-full bg-zinc-200" />
               <span className={roleBadgeColor}>{user.role}</span>
             </div>
           </div>
@@ -196,29 +196,29 @@ export default function DashboardPage() {
             {!isAdmin && (
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition-colors flex items-center gap-3"
+                className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 hover:text-blue-600 transition-colors flex items-center gap-3"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+                <div className="w-1.5 h-1.5 rounded-full bg-zinc-200" />
                 Diagnostics
               </button>
             )}
             <button
               onClick={handleLogout}
-              className="bg-white/5 border border-white/5 text-zinc-500 hover:text-white px-6 py-2 rounded-full text-[10px] transition-all font-black uppercase tracking-[0.2em]"
+              className="bg-zinc-100 border border-zinc-200 text-zinc-500 hover:text-zinc-900 px-6 py-2 rounded-full text-[10px] transition-all font-black uppercase tracking-[0.2em]"
             >
               Logout
             </button>
           </div>
         </header>
 
-        {/* ── Tab Navigation ─────────────────────────────────── */}
-        <div className="flex gap-12 mb-16 border-b border-white/5 pb-1 justify-center">
+        {/* tab navigation */}
+        <div className="flex gap-12 mb-16 border-b border-zinc-100 pb-1 justify-center">
           {getTabs().map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`pb-4 font-black text-[11px] uppercase tracking-[0.4em] transition-all relative ${
-                activeTab === tab.id ? 'text-white' : 'text-zinc-700 hover:text-zinc-500'
+                activeTab === tab.id ? 'text-zinc-900' : 'text-zinc-400 hover:text-zinc-600'
               }`}
             >
               {tab.label}
@@ -254,7 +254,7 @@ export default function DashboardPage() {
             </div>
 
             {logs.length > 0 && !isAdmin && (
-              <div className="pt-20 border-t border-white/5">
+              <div className="pt-20 border-t border-zinc-100">
                 <h2 className="text-[10px] font-black text-zinc-700 uppercase tracking-[0.5em] mb-10 text-center">
                   Recent Processing Archive
                 </h2>
