@@ -96,7 +96,6 @@ See [`backend/.env.example`](backend/.env.example) for the full list:
 | `GEMINI_API_KEY` | ✅ | Google AI Studio API key |
 | `LLAMA_CLOUD_API_KEY` | ✅ | LlamaCloud parsing key |
 | `DATABASE_URL` | ✅ | PostgreSQL connection string |
-| `SECRET_KEY` | ✅ | JWT signing secret |
 | `LANGCHAIN_API_KEY` | Optional | LangSmith observability |
 
 ## 📊 AI Observability (LangSmith)
